@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The New Dealership Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050C0E; --panel:#132B35; --panel2:#1C3B42; --line:#1C3B42;
+    --ink:#EAF2F0; --mut:#7DA7A6; --dim:#4A7983;
+    --a1:#E99320; --a2:#7DA7A6; --a3:#BD3F16; --a4:#4A7983;
+    --a5:#E07B39; --a6:#5E9CA8; --a7:#D9A441; --a8:#8FB5B2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px 70px}
+  h1,h2,.big{font-family:Archivo,system-ui,sans-serif;font-weight:900;line-height:.95;letter-spacing:-.015em;text-transform:uppercase}
+  .kicker{font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:700;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase}
+  /* COVER */
+  .cover{padding:26px 0 0}
+  .cover .topline{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px}
+  .cover .topline .kicker{color:var(--mut)}
+  .hero{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+  .hero img{width:100%;height:clamp(420px,78vw,640px);object-fit:cover;display:block;filter:brightness(.8)}
+  .hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,12,14,.52) 0%,rgba(5,12,14,.34) 30%,rgba(5,12,14,.74) 62%,rgba(5,12,14,.97) 100%)}
+  .hero .htext{position:absolute;left:0;right:0;bottom:0;padding:26px 26px 22px}
+  .hero .kicker{color:var(--a1)}
+  .hero h1{font-size:clamp(46px,10.5vw,104px);margin:10px 0 10px;color:#fff}
+  .hero h1 .o{color:var(--a3)} .hero h1 .a{color:var(--a1)}
+  .hero .sub{font-size:clamp(15px,2.4vw,20px);font-weight:600;line-height:1.4;max-width:600px;color:#D8E6E3}
+  .coverstats{display:flex;border:1px solid var(--line);border-radius:14px;margin-top:14px;overflow:hidden}
+  .coverstats div{flex:1;padding:14px 16px;background:var(--panel);display:flex;flex-direction:column;gap:7px}
+  .coverstats div+div{border-left:1px solid var(--line)}
+  .coverstats .n{font-family:Archivo;font-weight:900;font-size:clamp(26px,5vw,40px);line-height:1;color:#fff}
+  .coverstats .l{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .toc{margin:26px 0 4px;border-top:1px solid var(--line)}
+  .toc a{display:flex;align-items:baseline;gap:16px;padding:13px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+  .toc .tn{font-family:Archivo;font-weight:900;font-size:26px;line-height:1}
+  .toc .tt{font-family:Archivo;font-weight:900;text-transform:uppercase;font-size:clamp(16px,3vw,22px);letter-spacing:.01em}
+  .toc .td{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);text-align:right}
+  /* SECTIONS */
+  section{margin-top:64px}
+  .shead{display:flex;align-items:flex-start;gap:16px;border-top:2px solid var(--ac,var(--line));padding-top:16px}
+  .snum{font-family:Archivo;font-weight:900;font-size:clamp(52px,9vw,92px);line-height:.85;color:var(--ac,var(--a1))}
+  .shead h2{font-size:clamp(32px,6.2vw,58px);color:#fff}
+  .shead h2 em{font-style:normal;color:var(--ac,var(--a1))}
+  .shead .kicker{color:var(--dim);margin-bottom:7px}
+  .deck{font-size:clamp(16px,2.3vw,20px);font-weight:600;line-height:1.45;max-width:720px;margin:14px 0 0;color:#C9DAD7}
+  section img.photo{width:100%;height:clamp(220px,42vw,430px);object-fit:cover;border-radius:16px;border:1px solid var(--line);margin:22px 0 6px;display:block}
+  .checks{list-style:none;margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+  @media(max-width:680px){.checks{grid-template-columns:1fr}}
+  .checks li{position:relative;padding:12px 14px 12px 44px;background:var(--panel);border:1px solid var(--line);border-radius:12px;font-size:15.5px;line-height:1.42;font-weight:600;color:#DCE9E6}
+  .checks li::before{content:"";position:absolute;left:14px;top:13px;width:17px;height:17px;border:3px solid var(--ac,var(--a1));border-radius:5px}
+  .checks li b{font-weight:800;color:#fff}
+  .checks li .why{display:block;font-weight:400;font-size:13.5px;color:var(--mut);margin-top:3px}
+  .pull{font-family:Archivo;font-weight:900;text-transform:uppercase;font-size:clamp(24px,4.6vw,42px);line-height:1.08;margin:30px 0 4px;color:var(--ac,var(--a1))}
+  .pull small{display:block;font-family:Inter;font-weight:600;text-transform:none;letter-spacing:0;font-size:15px;color:var(--mut);margin-top:9px;line-height:1.5}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+  .stat{flex:1;min-width:130px;border-radius:14px;padding:16px;background:var(--panel);border:1px solid var(--line)}
+  .stat .n{font-family:Archivo;font-weight:900;font-size:clamp(34px,5.4vw,52px);line-height:1;color:var(--ac,var(--a1))}
+  .stat .l{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-top:8px;color:var(--dim)}
+  .callout{border:1px solid var(--line);border-left:5px solid var(--ac,var(--a1));border-radius:12px;padding:17px 19px;margin-top:22px;background:var(--panel)}
+  .callout .kicker{color:var(--ac,var(--a1));margin-bottom:9px}
+  .callout p{font-size:15.5px;line-height:1.55;font-weight:600;color:#DCE9E6}
+  .callout p b{color:#fff}
+  /* FINALE */
+  .finale{background:linear-gradient(180deg,var(--panel) 0%,#050C0E 90%);border:1px solid var(--line);border-radius:20px;padding:34px 26px 30px;margin-top:70px}
+  .finale h2{font-size:clamp(32px,6vw,56px);color:var(--a1)}
+  .finale .deck{color:#C9DAD7}
+  .finale ol{margin:22px 0 6px 22px;font-size:16.5px;line-height:1.5;font-weight:600;color:#DCE9E6}
+  .finale li{margin-bottom:13px}
+  .finale li b{color:var(--a1)}
+  .sign{font-family:Archivo;font-weight:900;text-transform:uppercase;font-size:clamp(20px,3.6vw,30px);margin-top:28px;line-height:1.18;color:#fff}
+  .sign span{color:var(--a3)}
+  footer{margin-top:34px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--dim);text-align:center;line-height:1.9}
+  @media print{
+    .checks li,.stat,.callout,.toc a{break-inside:avoid}
+    .shead{break-after:avoid}
+    img.photo{break-inside:avoid}
+    .hero img{height:480px}
+  }
+  @page{margin:12mm}
+</style>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-title" content="Playbook" />
+<meta name="theme-color" content="#050C0E" />
+<link rel="apple-touch-icon" href="icon-180.png" />
+<link rel="icon" href="icon-192.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ================= COVER ================= -->
+  <div class="cover">
+    <div class="topline">
+      <span class="kicker">Elias David · Field Manual</span>
+      <span class="kicker">Vol. 1 — 2026</span>
+    </div>
+    <div class="hero">
+      <img src="img/cover.jpg" alt="Manager reviewing a wall of sales numbers">
+      <div class="shade"></div>
+      <div class="htext">
+        <p class="kicker">The Turnaround Issue</p>
+        <h1>The New<br>Dealership<br><span class="o">Play</span><span class="a">book</span></h1>
+        <p class="sub">Everything I'd do walking into a new store — written from two weeks turning around Kia of Lynchburg. See it clearly. Fix the leads. Work the desk. Feed the lot. Leave it running.</p>
+      </div>
+    </div>
+    <div class="coverstats">
+      <div><div class="n">8</div><div class="l">Plays inside</div></div>
+      <div><div class="n">2</div><div class="l">Weeks at Kia</div></div>
+      <div><div class="n">1</div><div class="l">Standard — daily</div></div>
+    </div>
+    <div class="toc">
+      <a href="#s1"><span class="tn" style="color:var(--a1)">01</span><span class="tt">See the store clearly</span><span class="td">Numbers first</span></a>
+      <a href="#s2"><span class="tn" style="color:var(--a2)">02</span><span class="tt">Leads &amp; CRM</span><span class="td">Stop the leaks</span></a>
+      <a href="#s3"><span class="tn" style="color:var(--a3)">03</span><span class="tt">The desk</span><span class="td">Gross lives here</span></a>
+      <a href="#s4"><span class="tn" style="color:var(--a4)">04</span><span class="tt">People — the Daily Standard</span><span class="td">Every day</span></a>
+      <a href="#s5"><span class="tn" style="color:var(--a5)">05</span><span class="tt">Inventory &amp; the lot</span><span class="td">Feed the front line</span></a>
+      <a href="#s6"><span class="tn" style="color:var(--a6)">06</span><span class="tt">The website</span><span class="td">Visible &amp; selling</span></a>
+      <a href="#s7"><span class="tn" style="color:var(--a7)">07</span><span class="tt">The money</span><span class="td">Know the math</span></a>
+      <a href="#s8"><span class="tn" style="color:var(--a8)">08</span><span class="tt">Basics &amp; the handoff</span><span class="td">Leave it running</span></a>
+    </div>
+  </div>
+
+  <!-- ================= 01 NUMBERS ================= -->
+  <section id="s1" style="--ac:var(--a1)">
+    <div class="shead"><div class="snum">01</div><div>
+      <p class="kicker">Days 1–2 · Numbers first</p>
+      <h2>See the store <em>clearly</em></h2>
+    </div></div>
+    <p class="deck">You can't fix what you can't see. Before touching anything, get the store's real numbers on one board that everybody can read at a glance.</p>
+    <img class="photo" src="img/cover.jpg" alt="Sales dashboard wall">
+    <ul class="checks">
+      <li><b>Sales log access on day one.</b><span class="why">The desk log / sales sheet is the store's truth. Everything else is opinion.</span></li>
+      <li><b>Build the War Room board.</b> MTD units, total gross, new gross, used gross — refreshed several times a day.</li>
+      <li><b>Rank people units-first,</b> then gross. Halves count on split deals.</li>
+      <li><b>Every deal, itemized:</b> front, back, total.<span class="why">The bleeders hide in the averages.</span></li>
+      <li><b>Activity table, pulled separately:</b> calls, texts, appointments by person.<span class="why">The sales log never shows effort. Effort is where coaching lives.</span></li>
+      <li><b>Day counter on the board</b> — "Day __ of __ selling days" — so pace is never a guess.</li>
+      <li><b>Know the factory target AND the real objective.</b><span class="why">At Kia, 25 was October's target; 60 a month was the objective. Confusing the two poisons every conversation.</span></li>
+    </ul>
+    <p class="pull">"The board doesn't manage anybody. It just makes lying to yourself impossible."</p>
+  </section>
+
+  <!-- ================= 02 LEADS & CRM ================= -->
+  <section id="s2" style="--ac:var(--a2)">
+    <div class="shead"><div class="snum">02</div><div>
+      <p class="kicker">Where the money leaks first</p>
+      <h2>Leads <em>&amp; CRM</em></h2>
+    </div></div>
+    <p class="deck">Most stores don't have a traffic problem. They have a follow-up problem wearing a traffic costume. Fix the pipes before buying more water.</p>
+    <img class="photo" src="img/leads.jpg" alt="Salesperson working leads on a headset">
+    <ul class="checks">
+      <li><b>Audit the lead rotation.</b> Who's on it, who shouldn't be — part-timers off.</li>
+      <li><b>Test-lead your own store.</b> Submit one and time the first <i>real</i> response — not the auto-reply.</li>
+      <li><b>Fix the auto-responder.</b> It must never say "sorry we missed you." It sells the car: info filled in, photo in, offer to reserve it, push texting.</li>
+      <li><b>After-hours coverage.</b> A 7 PM or Sunday lead still gets a real response.<span class="why">At Kia this took a brand-new rule — half the week's leads arrived after the rule's window closed.</span></li>
+      <li><b>15-minute escalation: NOTIFY ONLY.</b> Never auto-reassign.<span class="why">The customer already got an email in the first salesperson's name. Switching people mid-thread breaks it.</span></li>
+      <li><b>Templates 1–6 saved and numbered,</b> on a 12-hour cadence. No website links — the customer already clicked the car.</li>
+      <li><b>Saturday before-open / after-close coverage</b> — the gap nobody sees until a lead dies in it.</li>
+      <li><b>Audit by ACTIVITY, never by status.</b><span class="why">The status dropdown is one manual field nothing automatic moves. "New" leads at Kia had calls, texts and emails all over them. Overdue-task count is the honest signal.</span></li>
+      <li><b>Manager follow-up email</b> to every active new-car lead — build it and send it in the <b>same session</b>.</li>
+      <li><b>eBlast the overdue follow-ups</b> with a short personal check-in.<span class="why">221 people were waiting at Kia. That list is found money.</span></li>
+      <li><b>Run the Resurrection pipeline:</b> every lead on a stage board — New → Working → Engaging → Negotiation → Appointment → Sold. "Deals Working" = Engaging or above.</li>
+    </ul>
+    <div class="callout">
+      <p class="kicker">⭐ Check every phone number — store &amp; people</p>
+      <p>Every number that rings the store — website, Google, ads, signatures, listings — verified: right number, right department, no strays (one audit found <b>five</b> different numbers in the wild). Every salesperson's number <b>tracking in Purple Cloud</b> — untracked calls and texts are invisible, and invisible activity gets coached as laziness. Every number <b>correct in the CRM</b> — it feeds the phone merge field in every lead email that goes out. Then call the numbers yourself and hear where they land.</p>
+    </div>
+    <p class="pull">Ask for workflow-editor access on day one.<small>At Kia the 12-hour cadence died because the account had no editor and it took a support case just to ask. It was the single biggest blocker of the two weeks. Don't let it be yours.</small></p>
+  </section>
+
+  <!-- ================= 03 THE DESK ================= -->
+  <section id="s3" style="--ac:var(--a3)">
+    <div class="shead"><div class="snum">03</div><div>
+      <p class="kicker">Gross is made — or given away — here</p>
+      <h2>The <em>Desk</em></h2>
+    </div></div>
+    <p class="deck">No new titles. No reorganization. Just standing rules, enforced by whoever is sitting in the tower.</p>
+    <img class="photo" src="img/desk.jpg" alt="Managers working a deal in the tower">
+    <ul class="checks">
+      <li><b>Standing desk rule,</b> enforced by whoever's in the tower. Every deal gets worked — fully.</li>
+      <li><b>No negative-front used deal leaves</b> without a manager's eyes on it first.</li>
+      <li><b>Real trade ACV + manager review</b> BEFORE numbers are presented.<span class="why">Kia's biggest front losses weren't bad cars. They were over-allowances that penciled a new-car deal.</span></li>
+      <li><b>Protect the finance presentation.</b><span class="why">While front is thin, the back end carries the store.</span></li>
+      <li><b>Phone standard:</b> take control → do discovery → answer the buying signal → close the appointment. No order-taking.</li>
+    </ul>
+    <p class="pull">"Real ACV. Not the number that pencils the deal."</p>
+  </section>
+
+  <!-- ================= 04 PEOPLE ================= -->
+  <section id="s4" style="--ac:var(--a4)">
+    <div class="shead"><div class="snum">04</div><div>
+      <p class="kicker">People — the Daily Standard</p>
+      <h2>Same standard, <em>every day</em></h2>
+    </div></div>
+    <p class="deck">Post it. Work it. No exceptions for anybody's mood, including the manager's.</p>
+    <img class="photo" src="img/team.jpg" alt="Morning sales huddle in the showroom">
+    <div class="stats">
+      <div class="stat"><div class="n">20</div><div class="l">Calls a day</div></div>
+      <div class="stat"><div class="n">40</div><div class="l">Texts a day</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">Overdue tasks at close</div></div>
+      <div class="stat"><div class="n">&lt;15<span style="font-size:.5em">min</span></div><div class="l">First response</div></div>
+    </div>
+    <ul class="checks">
+      <li><b>20 calls + 40 texts daily</b> — 10 and 20 before lunch, 10 and 20 after.</li>
+      <li><b>Organizer cleared to zero</b> every night. Nobody hides in red.</li>
+      <li><b>Every lead answered immediately:</b> intro text + a photo of the salesperson's contact card.</li>
+      <li><b>Text a real photo</b> of the customer's actual car, on the lot.</li>
+      <li><b>Confirm tomorrow's appointments tonight.</b></li>
+      <li><b>Log everything.</b> If it isn't in the CRM, it didn't happen.</li>
+      <li><b>Coach behavior, not closing %.</b><span class="why">At two or three cars each, closing ratios are noise. Zero texts is a fact.</span></li>
+    </ul>
+  </section>
+
+  <!-- ================= 05 INVENTORY & LOT ================= -->
+  <section id="s5" style="--ac:var(--a5)">
+    <div class="shead"><div class="snum">05</div><div>
+      <p class="kicker">Inventory &amp; the lot</p>
+      <h2>Feed the <em>front line</em></h2>
+    </div></div>
+    <p class="deck">The lot is the store's biggest billboard, and most stores park it by accident. Inventory health on the numbers side — theater on the street side.</p>
+    <img class="photo" src="img/lot.jpg" alt="A front line of colorful cars">
+    <ul class="checks">
+      <li><b>Pull inventory health:</b> units in stock, average days, age buckets.<span class="why">Reconcile when the system's own reports disagree — at Kia they said 17, 20 and 21 used on the same day.</span></li>
+      <li><b>Price the aged units first.</b><span class="why">Kia had 9 over 60 days; the oldest sat 207 days at 93% of market, waiting on a decision, not a discount.</span></li>
+      <li><b>Whole-lot pricing vs market</b> — how many above, how many below, where the lot sits as a whole.</li>
+      <li><b>Check new-car pricing against the front target</b> before the month starts.<span class="why">Only 1 of 102 priced units at Kia carried $2,000 over cost. A $1,500 front average was uphill before the first up.</span></li>
+      <li><b>Owner-retention dials:</b> 20 calls + 40 texts a day to owners near payoff — with an urgency, hook, value and CTA script, not just dials.</li>
+    </ul>
+    <div class="callout">
+      <p class="kicker">⭐ Lot arrangement — a process with an owner</p>
+      <p>The front line is an advertisement: <b>the most colorful cars up front</b> where the road sees them. <b>Signs and balloons fresh</b> — faded signage reads as a closed store. <b>Hoods open</b> on the front row — it says "open for business" from the street. <b>Upbeat music outside, chill music inside</b> — energy on the lot, calm at the desk. And the rule that makes it a process instead of a cleanup: <b>when a front-line car sells or delivers, the next colorful unit rotates in the same day.</b> The arrangement never decays back to whatever got parked there.</p>
+    </div>
+    <p class="pull">"Does the store look open and alive from the road?"<small>At Kia the answer was no — dead neon sign, a downslope hiding the inventory. The owner wouldn't fix the sign with a new store coming, so the visibility play was manufacturer-paid Christmas lights. Work the problem you actually have.</small></p>
+  </section>
+
+  <!-- ================= 06 WEBSITE ================= -->
+  <section id="s6" style="--ac:var(--a6)">
+    <div class="shead"><div class="snum">06</div><div>
+      <p class="kicker">⭐ Elias's addition — day one</p>
+      <h2>The website: <em>visible &amp; built to sell</em></h2>
+    </div></div>
+    <p class="deck">The website is the store's real front door — more customers walk through it in a day than through the glass. Run the full visibility + sales-capture report on day one.</p>
+    <img class="photo" src="img/website.jpg" alt="Shopping for a car on a phone" style="object-fit:contain;background:#2563eb">
+    <ul class="checks">
+      <li><b>Visibility:</b> indexed and fresh? Ranking for dealer and service searches — or do the aggregators own your used cars?</li>
+      <li><b>One clean Google identity.</b><span class="why">Reviews split across names, five phone numbers in the wild, a description naming the wrong city — all found in one audit, all fixable in a week.</span></li>
+      <li><b>Route every review ask</b> to the Google profile.</li>
+      <li><b>Chat/text widget</b> on the homepage, inventory AND vehicle pages.<span class="why">Its absence was the #1 sales leak in the Mercedes audit.</span></li>
+      <li><b>"Schedule Test Drive"</b> on every card and every vehicle page.</li>
+      <li><b>Transparent pricing, shown not gated</b> — MSRP, fee, final price.</li>
+      <li><b>Short ePrice form</b> — name + email, phone optional.</li>
+      <li><b>Value Your Trade with an INSTANT valuation.</b> Never a form that demands contact info before it gives anything.</li>
+      <li><b>Payment calculator ON the vehicle page</b> — not buried in the nav.</li>
+      <li><b>Soft-pull pre-approval.</b></li>
+      <li><b>Service specials page with real, itemized specials</b> — it drives fixed-ops traffic, not slogans.</li>
+      <li><b>A named human + direct text line</b> on inventory — "Text ___ @ ___".</li>
+      <li><b>Verify on an actual phone:</b> tap-to-call, tap-to-text, the sticky bar. Desktop-perfect means nothing.</li>
+    </ul>
+    <p class="pull">"Make sure it's visible — and make sure it leads to sales."</p>
+  </section>
+
+  <!-- ================= 07 MONEY ================= -->
+  <section id="s7" style="--ac:var(--a7)">
+    <div class="shead"><div class="snum">07</div><div>
+      <p class="kicker">Know the store's math</p>
+      <h2>The <em>Money</em></h2>
+    </div></div>
+    <p class="deck">A target you can't say in per-car numbers is a wish. Do the arithmetic in week one, while it's still cheap.</p>
+    <img class="photo" src="img/money.jpg" alt="Customer signing at the desk">
+    <div class="stats">
+      <div class="stat"><div class="n">$100K</div><div class="l">Monthly gross target</div></div>
+      <div class="stat"><div class="n">$5,000</div><div class="l">Per car at 20 cars</div></div>
+      <div class="stat"><div class="n">$2,500</div><div class="l">Per car at 40 cars</div></div>
+      <div class="stat"><div class="n">$1,667</div><div class="l">Per car at 60 cars</div></div>
+    </div>
+    <ul class="checks">
+      <li><b>Working model:</b> $1,500 front + $1,000 back at 40 cars.</li>
+      <li><b>Get the pack off a deal recap.</b> Don't guess it.<span class="why">And don't build math on the $799 — that's a processing fee added on the statement, not the pack.</span></li>
+      <li><b>Sales payroll vs gross</b> — Kia's model ran $62K/month of sales payroll against the target.</li>
+      <li><b>Get the monthly statement:</b> service + parts gross and fixed-ops pay complete the picture.<span class="why">At Kia: 5 techs, 3 advisors, service and parts managers, 2 clerks, 2 detailers — and the numbers never arrived. The model stayed half-built.</span></li>
+      <li><b>Parse the factory incentive pack</b> on day one — rates, customer cash, lease cash, stair-step money — so "what's on this car?" takes seconds, not a phone call.</li>
+    </ul>
+  </section>
+
+  <!-- ================= 08 BASICS & HANDOFF ================= -->
+  <section id="s8" style="--ac:var(--a8)">
+    <div class="shead"><div class="snum">08</div><div>
+      <p class="kicker">Basics &amp; the handoff</p>
+      <h2>Leave it <em>running</em></h2>
+    </div></div>
+    <p class="deck">The test of a turnaround isn't what happens while you're there. It's what survives you leaving.</p>
+    <img class="photo" src="img/handoff.jpg" alt="Handing a customer their keys">
+    <ul class="checks">
+      <li><b>Wiring instructions sheet,</b> dealership-branded.<span class="why">A customer wiring money needs it the day they ask — not after a scramble through another store's letterhead.</span></li>
+      <li><b>Paperwork basics confirmed</b> with the office before the first deal needs them.</li>
+      <li><b>Write the handoff</b> for the person staying: what changed, what's still blocked, who owns what.</li>
+      <li><b>The board keeps updating without you.</b></li>
+      <li><b>Blockers written down with case numbers</b> — not left in your head.</li>
+    </ul>
+  </section>
+
+  <!-- ================= FINALE ================= -->
+  <div class="finale">
+    <p class="kicker" style="color:var(--a1)">The honest page</p>
+    <h2>Wanted at Kia — blocked</h2>
+    <p class="deck">Six things the last store never got. They're in this playbook so the next store does.</p>
+    <ol>
+      <li><b>The 12-hour follow-up cadence</b> — no workflow editor in the account. Ask for access on day one.</li>
+      <li><b>Saturday early/late lead coverage</b> — spec written, never built.</li>
+      <li><b>The manager email to ~88 active leads</b> — built, saved, then eaten by the blast tool on reopen. Build and send in one session.</li>
+      <li><b>The eBlast to 221 overdue follow-ups</b> — drafted, never sent.</li>
+      <li><b>The monthly statement</b> — service and parts numbers never arrived.</li>
+      <li><b>The pack amount</b> — still unknown. Get it off a deal recap in week one.</li>
+    </ol>
+    <p class="sign">Walk in. See it clearly.<br>Fix what leaks. <span>Leave it running.</span></p>
+  </div>
+
+  <footer>The New Dealership Playbook · Elias David<br>Built from Kia of Lynchburg, October 2026 · Living document — add to it anytime</footer>
+</div>
+</body>
+</html>
