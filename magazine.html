@@ -54,6 +54,13 @@
   .checks li{position:relative;padding:12px 14px 12px 44px;background:var(--panel);border:1px solid var(--line);border-radius:12px;font-size:15.5px;line-height:1.42;font-weight:600;color:#DCE9E6}
   .checks li::before{content:"";position:absolute;left:14px;top:13px;width:17px;height:17px;border:3px solid var(--ac,var(--a1));border-radius:5px}
   .checks li b{font-weight:800;color:#fff}
+  .checks li{cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .checks li.done{color:var(--mut)}
+  .checks li.done b{color:var(--mut)}
+  .checks li.done::before{background:var(--ac,var(--a1))}
+  .checks li.done::after{content:"✓";position:absolute;left:18px;top:12px;font-size:15px;font-weight:900;color:#fff}
+  #pbReset{position:fixed;right:14px;bottom:14px;z-index:60;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt);background:rgba(19,43,53,.88);border:1px solid var(--line2);border-radius:999px;padding:10px 16px;cursor:pointer;backdrop-filter:blur(8px)}
+  @media print{#pbReset{display:none}}
   .checks li .why{display:block;font-weight:400;font-size:13.5px;color:var(--mut);margin-top:3px}
   .pull{font-family:Archivo;font-weight:900;text-transform:uppercase;font-size:clamp(24px,4.6vw,42px);line-height:1.08;margin:30px 0 4px;color:var(--ac,var(--a1))}
   .pull small{display:block;font-family:Inter;font-weight:600;text-transform:none;letter-spacing:0;font-size:15px;color:var(--mut);margin-top:9px;line-height:1.5}
@@ -83,14 +90,6 @@
   }
   @page{margin:12mm}
 </style>
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="apple-mobile-web-app-title" content="Playbook" />
-<meta name="theme-color" content="#050C0E" />
-<link rel="apple-touch-icon" href="icon-180.png" />
-<link rel="icon" href="icon-192.png" />
-<link rel="manifest" href="manifest.webmanifest" />
 </head>
 <body>
 <div class="wrap">
@@ -324,5 +323,12 @@
 
   <footer>The New Dealership Playbook · Elias David<br>Built from Kia of Lynchburg, October 2026 · Living document — add to it anytime</footer>
 </div>
+<button id="pbReset" type="button">↺ Start fresh</button>
+<script>
+(function(){var KEY='playbookChecksV1';var items=[].slice.call(document.querySelectorAll('.checks li'));var saved=[];try{saved=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+function save(){var now=[];items.forEach(function(li,i){if(li.classList.contains('done'))now.push(i)});try{localStorage.setItem(KEY,JSON.stringify(now))}catch(e){}}
+items.forEach(function(li,i){if(saved.indexOf(i)>-1)li.classList.add('done');li.addEventListener('click',function(){li.classList.toggle('done');save()})});
+var b=document.getElementById('pbReset');if(b){b.addEventListener('click',function(){if(window.confirm('Clear every check and start fresh?')){items.forEach(function(li){li.classList.remove('done')});save()}})}})();
+</script>
 </body>
 </html>
